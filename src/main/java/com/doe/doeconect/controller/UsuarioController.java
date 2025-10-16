@@ -28,9 +28,22 @@ public class UsuarioController {
 
 
      @PostMapping
-     public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
-          Usuario novoUsuario = usuarioService.save(usuario);
-          return ResponseEntity.status(HttpStatus.CREATED).body(novoUsuario);
+     public ResponseEntity<Object> save(@RequestBody Usuario usuario) {
+          try {
+               System.out.println("Recebendo usuário: " + usuario.getNome());
+               Usuario novoUsuario = usuarioService.save(usuario);
+               return ResponseEntity.status(HttpStatus.CREATED).body(novoUsuario);
+          } catch (Exception e) {
+               System.out.println("Erro ao salvar: " + e.getMessage());
+               e.printStackTrace();
+               return ResponseEntity.status(500).body(
+                       Map.of(
+                               "status", 500,
+                               "error", "Internal Server Error",
+                               "message", "Erro ao criar usuário: " + e.getMessage()
+                       )
+               );
+          }
      }
      @GetMapping("/{id}")
      public ResponseEntity<Object> findById(@PathVariable String id) {

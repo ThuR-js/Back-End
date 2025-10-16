@@ -23,6 +23,7 @@ public class UsuarioService {
 
     public Usuario save(Usuario usuario) {
         usuario.setStatusUsuario("ATIVO");
+        usuario.setDataCadastro(java.time.LocalDate.now());
         return usuarioRepository.save(usuario);
     }
 
