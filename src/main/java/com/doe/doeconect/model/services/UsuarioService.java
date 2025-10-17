@@ -21,12 +21,15 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
+    // Método responsável em criar o usuário
+
     public Usuario save(Usuario usuario) {
         usuario.setStatusUsuario("ATIVO");
         usuario.setDataCadastro(java.time.LocalDate.now());
         return usuarioRepository.save(usuario);
     }
 
+    // Método responsável em resgatar o usuário por id
    public Usuario findById(Long id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Produto não encontrado com o id" + id));
