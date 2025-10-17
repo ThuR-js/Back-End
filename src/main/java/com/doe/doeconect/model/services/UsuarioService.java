@@ -15,14 +15,12 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     // Método responsável em listar todos os produtos cadastrados no banco de dados
-
     public List<Usuario> findAll() {
 
         return usuarioRepository.findAll();
     }
 
     // Método responsável em criar o usuário
-
     public Usuario save(Usuario usuario) {
         usuario.setStatusUsuario("ATIVO");
         usuario.setDataCadastro(java.time.LocalDate.now());
@@ -35,6 +33,7 @@ public class UsuarioService {
                 .orElseThrow(()-> new RuntimeException("Produto não encontrado com o id" + id));
    }
 
+    // Método responsável atualizar um dado, porém não será usado
    public Usuario update(Long id, Usuario usuario) {
         Usuario usuarioExistente = findById(id);
         usuarioExistente.setNome(usuario.getNome());
@@ -51,6 +50,7 @@ public class UsuarioService {
 
    }
 
+    // Método responsável por deletar um usuário por id
    public void delete(Long id) {
         Usuario usuarioExistente = findById(id);
         usuarioRepository.delete(usuarioExistente);
