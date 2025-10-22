@@ -30,10 +30,11 @@ public class UsuarioService {
     // Método responsável em resgatar o usuário por id
    public Usuario findById(Long id) {
         return usuarioRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Produto não encontrado com o id" + id));
+                .orElseThrow(()-> new RuntimeException("Usuário não encontrado com o id: " + id));
    }
 
     // Método responsável atualizar um dado, porém não será usado
+   // Método responsável atualizar um dado, porém não será usado
    public Usuario update(Long id, Usuario usuario) {
         Usuario usuarioExistente = findById(id);
         usuarioExistente.setNome(usuario.getNome());
