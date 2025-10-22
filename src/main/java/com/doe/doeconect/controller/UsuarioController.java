@@ -52,7 +52,7 @@ public class UsuarioController {
           } catch (NumberFormatException e) {
                return ResponseEntity.badRequest().body(
                        Map.of(
-                               "status", 404,
+                               "status", 400,
                                "error", "Bad Request",
                                "message", "O id informado não é válido: " + id
                        )
@@ -83,6 +83,45 @@ public class UsuarioController {
                        Map.of(
                                "status", 400,
                                "error", "Bad Request",
+                               "message", "O id informado não é válido: " + id
+                       )
+               );
+          }
+          catch (RuntimeException e ) {
+               return ResponseEntity.status(404).body(
+                       Map.of(
+                               "status", "404",
+                               "error", "Not Found",
+                               "message", "Produto não encontrado com o id: " + id
+                       )
+               );
+          }
+     }
+
+     @PutMapping("/{id}")
+     public ResponseEntity<Object> atualizarUsuario(@RequestBody Usuario usuario, @PathVariable String id) {
+          try {
+               usuarioService.update(Long.parseLong(id), usuario);
+               return ResponseEntity.ok().body(
+                       Map.of(
+                               "status", 200,
+                               "message",
+                               "Produto excluido com sucesso!")
+               );
+          } catch (NumberFormatException e) {
+               return ResponseEntity.badRequest().body(
+                       Map.of(
+                               "status", 400,
+                               "error", "Bad Request",
+                               "message", "O id informado não é válido: " + id
+                       )
+               );
+          }
+          catch (RuntimeException e ) {
+               return ResponseEntity.status(404).body(
+                       Map.of(
+                               "status", "404",
+                               "error", "Not Found",
                                "message", "Produto não encontrado com o id: " + id
                        )
                );
