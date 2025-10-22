@@ -106,7 +106,7 @@ public class UsuarioController {
                        Map.of(
                                "status", 200,
                                "message",
-                               "Produto excluido com sucesso!")
+                               "Produto atualizado com sucesso!")
                );
           } catch (NumberFormatException e) {
                return ResponseEntity.badRequest().body(
