@@ -16,11 +16,9 @@ public class Doador {
     @Column(length = 100, nullable = false)
     private String nome;
 
-    @Column(length = 100, nullable = false)
-    private String email;
-
-    @Column(length = 15, nullable = false)
-    private String telefone;
+    @Column(nullable = false)
+    private LocalDate dataNascimento;
+    @CreationTimestamp
 
     @Column(length = 12, nullable = false)
     private String cpf;
@@ -28,15 +26,7 @@ public class Doador {
     @Column(length = 9, nullable = false)
     private String cep;
 
-    @Column(length = 100, nullable = false)
-    private String senha;
-
-    @Column(length = 20, nullable = true)
-    private String nivelAcesso;
-
-     //private foto
-    @Column(length = 200, nullable = false)
-    private String caminhoFoto;
+    //private foto de perfil
 
     // private usuario_id
 
@@ -55,14 +45,6 @@ public class Doador {
         this.statusDoador = statusDoador;
     }
 
-    public String getCaminhoFoto() {
-        return caminhoFoto;
-    }
-
-    public void setCaminhoFoto(String caminhoFoto) {
-        this.caminhoFoto = caminhoFoto;
-    }
-
     public LocalDate getDataCadastro() {
         return dataCadastro;
     }
@@ -71,21 +53,9 @@ public class Doador {
         this.dataCadastro = dataCadastro;
     }
 
-    public String getNivelAcesso() {
-        return nivelAcesso;
-    }
+    public LocalDate getDataNascimento() {return dataNascimento;}
 
-    public void setNivelAcesso(String nivelAcesso) {
-        this.nivelAcesso = nivelAcesso;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+    public void setDataNascimento(LocalDate dataNascimento) {this.dataNascimento = dataNascimento;}
 
     public String getCep() {
         return cep;
@@ -101,22 +71,6 @@ public class Doador {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getNome() {

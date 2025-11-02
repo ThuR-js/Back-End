@@ -127,6 +127,43 @@ public class UsuarioController {
                );
           }
      }
+
+     @PutMapping("/{id}/inativar")
+     public ResponseEntity<Object> inativarUsuario(@PathVariable String id) {
+          try {
+               usuarioService.inativar(Long.parseLong(id));
+               return ResponseEntity.ok().body(
+                       Map.of(
+                               "status", 200,
+                               "message", "Usuário inativado com sucesso!")
+               );
+          } catch (NumberFormatException e) {
+               return ResponseEntity.badRequest().body(
+                       Map.of(
+                               "status", 400,
+                               "error", "Bad Request",
+                               "message", "O id informado não é válido: " + id
+                       )
+               );
+          } catch (RuntimeException e) {
+               return ResponseEntity.status(404).body(
+                       Map.of(
+                               "status", "404",
+                               "error", "Not Found",
+                               "message", "Usuário não encontrado com o id: " + id
+                       )
+               );
+          }
+
+     }
+     @PutMapping("/{id}/reativar")
+           public ResponseEntity<Usuario> reativar(@PathVariable Long id) {
+               try {
+                 Usuario usuarioReativado = usuarioService.reativar(id);
+             return ResponseEntity.ok(usuarioReativado);} catch (RuntimeException e) {return ResponseEntity.notFound().build();
+        }
+    }
+
 }
 
 

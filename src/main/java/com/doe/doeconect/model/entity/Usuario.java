@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Usuario")
@@ -19,26 +20,22 @@ public class Usuario {
     @Column(length = 100, nullable = false)
     private String email;
 
-    @Column(length = 15, nullable = false)
-    private String telefone;
-
-    @Column(length = 12, nullable = false)
-    private String cpf;
-
     @Column(length = 100, nullable = false)
     private String senha;
 
     @Column(length = 20, nullable = true)
     private String nivelAcesso;
 
-    //private foto
-   // @Column(length = 200, nullable = true)
-  //  private String caminhoFoto;
+    //private foto de perfil
+    // @Column(length = 200, nullable = true)
+    //  private String caminhoFoto;
 
-    @Column(nullable = false)
-    private LocalDate dataCadastro;
+    @Column(name = "data_cadastro",nullable = false)
     @CreationTimestamp
-    @Column(length = 20, nullable = false)
+    private LocalDateTime dataCadastro;
+
+
+    @Column(name = "status_usuario", length = 20, nullable = false)
     private String statusUsuario;
 
 
@@ -51,23 +48,20 @@ public class Usuario {
         this.id = id;
     }
 
-
-
-    public LocalDate getDataCadastro() {
+    public LocalDateTime getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(LocalDate dataCadastro) {
+    public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 
-   // public String getCaminhoFoto() {
-      //  return caminhoFoto;
+    // public String getCaminhoFoto() {
+    //  return caminhoFoto;
     //}
-
-   // public void setCaminhoFoto(String caminhoFoto) {
-     //   this.caminhoFoto = caminhoFoto;
-   // }
+    // public void setCaminhoFoto(String caminhoFoto) {
+    //   this.caminhoFoto = caminhoFoto;
+    // }
 
     public String getNivelAcesso() {
         return nivelAcesso;
@@ -77,28 +71,12 @@ public class Usuario {
         this.nivelAcesso = nivelAcesso;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getEmail() {

@@ -23,7 +23,7 @@ public class UsuarioService {
     // Método responsável em criar o usuário
     public Usuario save(Usuario usuario) {
         usuario.setStatusUsuario("ATIVO");
-        usuario.setDataCadastro(java.time.LocalDate.now());
+        usuario.setDataCadastro(java.time.LocalDateTime.now());
         return usuarioRepository.save(usuario);
     }
 
@@ -39,8 +39,6 @@ public class UsuarioService {
         Usuario usuarioExistente = findById(id);
         usuarioExistente.setNome(usuario.getNome());
         usuarioExistente.setEmail(usuario.getEmail());
-        usuarioExistente.setTelefone(usuario.getTelefone());
-        usuarioExistente.setCpf(usuario.getCpf());
         usuarioExistente.setSenha(usuario.getSenha());
         usuarioExistente.setNivelAcesso(usuario.getNivelAcesso());
         ///usuarioExistente.setCaminhoFoto(usuario.getCaminhoFoto());
@@ -56,6 +54,20 @@ public class UsuarioService {
         Usuario usuarioExistente = findById(id);
         usuarioRepository.delete(usuarioExistente);
    }
+
+   // Método responsável por inativar um usuário (soft delete)
+   public Usuario inativar(Long id) {
+        Usuario usuarioExistente = findById(id);
+        usuarioExistente.setStatusUsuario("INATIVO");
+        return usuarioRepository.save(usuarioExistente);
+   }
+
+    // Método para reativar usuário
+    public Usuario reativar(Long id) {
+        Usuario usuarioExistente = findById(id);
+        usuarioExistente.setStatusUsuario("ATIVO");
+        return usuarioRepository.save(usuarioExistente);
+    }
 
 
 }

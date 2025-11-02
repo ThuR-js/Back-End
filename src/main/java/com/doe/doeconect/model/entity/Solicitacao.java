@@ -14,7 +14,8 @@ public class Solicitacao {
     @Column(nullable = false)
     private LocalDate dataCadastro;
     @CreationTimestamp
-
+    // usuario_id
+    // anuncio_id
     @Column(length = 20, nullable = false)
     private String statusSoliitacao;
 

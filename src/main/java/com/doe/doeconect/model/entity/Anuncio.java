@@ -24,8 +24,12 @@ public class Anuncio {
     private String tamanho;
 
     //private condicao_id
+    @Column(length = 20, nullable = false)
+    private String condicao;
+
     private String caminhoFoto;
     // private foto
+    // caminho da foto para armazenar
     // private doador_id
 
     @Column(nullable = false)
@@ -34,6 +38,10 @@ public class Anuncio {
 
     @Column(length = 20, nullable = false)
     private String statusAnuncio;
+
+    public String getCondicao() {return condicao;}
+
+    public void setCondicao(String condicao) {this.condicao = condicao;}
 
     public Long getId() {
         return id;
