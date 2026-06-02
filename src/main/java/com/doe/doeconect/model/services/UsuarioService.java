@@ -36,6 +36,9 @@ public class UsuarioService {
     public Usuario save(Usuario usuario) {
         usuario.setPassword(encoder.encode(usuario.getPassword()));
         usuario.setStatusUsuario("ATIVO");
+        if (usuario.getNivelAcesso() == null || usuario.getNivelAcesso().isBlank()) {
+            usuario.setNivelAcesso("DONATARIO");
+        }
         return usuarioRepository.save(usuario);
     }
 
