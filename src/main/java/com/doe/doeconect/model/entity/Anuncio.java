@@ -32,6 +32,9 @@ public class Anuncio {
     @Column(name = "foto", length = 500)
     private String foto;
 
+    @Column(name = "fotos", length = 2000)
+    private String fotos;
+
     @ManyToOne
     @JoinColumn(name = "doador_id", nullable = false)
     @JsonIgnoreProperties({"anuncios", "hibernateLazyInitializer", "handler"})
@@ -60,6 +63,8 @@ public class Anuncio {
     public void setCondicao(String condicao) { this.condicao = condicao; }
     public String getFoto() { return foto; }
     public void setFoto(String foto) { this.foto = foto; }
+    public String getFotos() { return fotos; }
+    public void setFotos(String fotos) { this.fotos = fotos; }
     public Doador getDoador() { return doador; }
     public void setDoador(Doador doador) { this.doador = doador; }
     public String getRegiao() { return regiao; }

@@ -70,6 +70,7 @@ public class AnuncioService {
         if (anuncio.getTamanho() != null) existente.setTamanho(anuncio.getTamanho());
         if (anuncio.getCondicao() != null) existente.setCondicao(anuncio.getCondicao());
         if (anuncio.getFoto() != null) existente.setFoto(anuncio.getFoto());
+        if (anuncio.getFotos() != null) existente.setFotos(anuncio.getFotos());
         if (anuncio.getRegiao() != null) existente.setRegiao(anuncio.getRegiao());
         if (anuncio.getStatusAnuncio() != null) {
             String statusAnterior = existente.getStatusAnuncio();
