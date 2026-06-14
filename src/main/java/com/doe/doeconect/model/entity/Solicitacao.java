@@ -27,7 +27,7 @@ public class Solicitacao {
     @JsonIgnoreProperties({"doador", "hibernateLazyInitializer", "handler"})
     private Anuncio anuncio;
 
-    @Column(length = 40, nullable = true)
+    @Column(length = 200, nullable = true)
     private String telefone;
 
     @Column(name = "status_solicitacao", length = 20, nullable = false)
