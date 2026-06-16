@@ -112,6 +112,16 @@ public class UsuarioService {
         return usuarioRepository.save(u);
     }
 
+    public Usuario reativarPorCredenciais(String email, String senha) {
+        Usuario u = usuarioRepository.findByUsername(email)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        if (!encoder.matches(senha, u.getPassword())) {
+            throw new RuntimeException("Credenciais inválidas.");
+        }
+        u.setStatusUsuario("ATIVO");
+        return usuarioRepository.save(u);
+    }
+
     public Usuario reativar(Long id) {
         Usuario u = findById(id);
         u.setStatusUsuario("ATIVO");

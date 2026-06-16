@@ -125,6 +125,18 @@ public class UsuarioController {
         }
     }
 
+    @PutMapping("/reativar-por-credenciais")
+    public ResponseEntity<Object> reativarPorCredenciais(@RequestBody Map<String, String> body) {
+        try {
+            String email = body.get("email");
+            String senha = body.get("senha");
+            Usuario usuario = usuarioService.reativarPorCredenciais(email, senha);
+            return ResponseEntity.ok(Map.of("message", "Conta reativada com sucesso!"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(400).body(Map.of("message", e.getMessage()));
+        }
+    }
+
     @PutMapping("/{id}/reativar")
     public ResponseEntity<Object> reativar(@PathVariable Long id) {
         try {
