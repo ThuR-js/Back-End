@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.doe.doeconect.model.entity.Usuario;
 import com.doe.doeconect.model.repository.AnuncioRepository;
+import com.doe.doeconect.model.repository.AnaliseAdministradorRepository;
 import com.doe.doeconect.model.repository.DoadorRepository;
 import com.doe.doeconect.model.repository.FavoritoRepository;
 import com.doe.doeconect.model.repository.SolicitacaoRepository;
@@ -22,6 +23,8 @@ public class UsuarioService {
     private DoadorRepository doadorRepository;
     @Autowired
     private AnuncioRepository anuncioRepository;
+    @Autowired
+    private AnaliseAdministradorRepository analiseRepository;
     @Autowired
     private SolicitacaoRepository solicitacaoRepository;
     @Autowired
@@ -81,25 +84,22 @@ public class UsuarioService {
 
     public void excluirConta(Long id) {
         Usuario usuario = findById(id);
-        // Inativa solicitações
-        solicitacaoRepository.findByUsuarioId(id).forEach(s -> {
-            s.setStatusSolicitacao("CANCELADA");
-            solicitacaoRepository.save(s);
-        });
+        // Remove solicitações
+        solicitacaoRepository.deleteAll(solicitacaoRepository.findByUsuarioId(id));
         // Remove favoritos
         favoritoRepository.findByUsuarioIdAndTipo(id, "FAVORITO")
                 .forEach(favoritoRepository::delete);
-        // Inativa anúncios do doador vinculado
+        // Remove anúncios e dependências do doador vinculado
         doadorRepository.findByUsuarioId(id).ifPresent(doador -> {
-            anuncioRepository.findByDoadorId(doador.getId()).forEach(a -> {
-                a.setStatusAnuncio("INATIVO");
-                anuncioRepository.save(a);
+            anuncioRepository.findByDoadorId(doador.getId()).forEach(anuncio -> {
+                analiseRepository.deleteAll(analiseRepository.findByAnuncioId(anuncio.getId()));
+                favoritoRepository.deleteAll(favoritoRepository.findByAnuncioId(anuncio.getId()));
+                solicitacaoRepository.deleteAll(solicitacaoRepository.findByAnuncioId(anuncio.getId()));
+                anuncioRepository.delete(anuncio);
             });
-            doador.setStatusDoador("INATIVO");
-            doadorRepository.save(doador);
+            doadorRepository.delete(doador);
         });
-        usuario.setStatusUsuario("INATIVO");
-        usuarioRepository.save(usuario);
+        usuarioRepository.delete(usuario);
     }
 
     public void delete(Long id) {
