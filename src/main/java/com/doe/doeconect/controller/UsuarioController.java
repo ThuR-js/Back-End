@@ -50,7 +50,8 @@ public class UsuarioController {
                     "email", usuario.getUsername(),
                     "nivelAcesso", usuario.getNivelAcesso() != null ? usuario.getNivelAcesso() : "",
                     "foto", usuario.getFoto() != null ? usuario.getFoto() : "",
-                    "regiao", usuario.getRegiao() != null ? usuario.getRegiao() : ""
+                    "regiao", usuario.getRegiao() != null ? usuario.getRegiao() : "",
+                    "dataCadastro", usuario.getDataCadastro() != null ? usuario.getDataCadastro().toString() : ""
             ));
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(Map.of("message", e.getMessage()));
